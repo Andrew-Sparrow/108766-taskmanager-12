@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d9dcdf0-c024-4a28-afed-ad490d86de75" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +34,7 @@
   </component>
   <component name="ProjectId" id="1fLdRsY5k7NsaMBQl2YYr28XzQM" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -66,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596001301204</updated>
-      <workItem from="1596001302689" duration="2551000" />
+      <workItem from="1596001302689" duration="4168000" />
     </task>
     <servers />
   </component>
