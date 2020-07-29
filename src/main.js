@@ -1,12 +1,13 @@
 'use strict';
 
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
+const TASK_COUNT = 3;
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
-const mainFilterElement = siteMainElement.querySelector(`.main__filter`);
+
+const render = (container, template, place) => {
+  container.insertAdjacentHTML(place, template);
+};
 
 const createSiteMenuTemplate = () => {
   return (`<section class="control__btn-wrap">
@@ -114,7 +115,7 @@ const createBoardTemplate = () => {
   );
 };
 
-const createTskTemplate = () => {
+const createTaskTemplate = () => {
   return (`<article class="card card--black">
             <div class="card__form">
               <div class="card__inner">
@@ -365,4 +366,16 @@ const createLoadMoreButtonTemplate = () => {
 };
 
 render(siteHeaderElement, createSiteMenuTemplate(), `beforeend`);
-render(siteHeaderElement, createFilterTemplate(), `afterend`);
+render(siteMainElement, createFilterTemplate(), `beforeend`);
+
+render(siteMainElement, createBoardTemplate(), `beforeend`);
+
+const boardElement = siteMainElement.querySelector(`.board`);
+const taskListElement = boardElement.querySelector(`.board__tasks`);
+
+
+for (let i = 0; i < TASK_COUNT; i++) {
+  render(taskListElement, createTaskTemplate(), `beforeend`);
+}
+
+render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
