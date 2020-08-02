@@ -26,3 +26,8 @@ node_modules/
 build/
 
 .idea/
+
+# Собранные JS-файлы (бандл)
+public/bundle.js
+public/bundle.js.map
+
