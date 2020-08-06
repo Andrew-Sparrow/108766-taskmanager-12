@@ -4,6 +4,7 @@ import {createTaskTemplate} from "./view/task.js";
 import {createBoardTemplate} from "./view/board.js";
 import {createTaskEditTemplate} from "./view/task-edit.js";
 import {createLoadMoreButtonTemplate} from "./view/load-more-button.js";
+import {generateTask} from "./mock/task.js";
 import {render} from "./view/util/render.js";
 
 const TASK_COUNT = 8;
