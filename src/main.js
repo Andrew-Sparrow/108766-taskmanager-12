@@ -9,6 +9,8 @@ import {render} from "./view/util/render.js";
 
 const TASK_COUNT = 8;
 
+const tasks = new Array(TASK_COUNT).fill().map(generateTask);
+
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
@@ -23,7 +25,7 @@ const taskListElement = boardElement.querySelector(`.board__tasks`);
 render(taskListElement, createTaskEditTemplate(), `afterbegin`);
 
 for (let i = 0; i < TASK_COUNT; i++) {
-  render(taskListElement, createTaskTemplate(), `beforeend`);
+  render(taskListElement, createTaskTemplate(tasks[i]), `beforeend`);
 }
 
 render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
