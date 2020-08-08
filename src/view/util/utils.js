@@ -10,11 +10,9 @@ export const isTaskExpired = (dueDate) => {
     return false;
   }
 
-  const currentDate = new Date();
+  const currentDate = getCurrentDay();
 
-  currentDate.setHours(23, 59, 59, 999);
-
-  return currentDate > dueDate.getTime();
+  return currentDate.getTime() > dueDate.getTime();
 };
 
 export const isTaskRepeating = (repeating) => {
@@ -23,4 +21,21 @@ export const isTaskRepeating = (repeating) => {
 
 export const humanizeTaskDueDate = (dueDate) => {
   return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
+};
+
+const getCurrentDay = () => {
+  const currentDate = new Date();
+  currentDate.setHours(23, 59, 59, 999);
+
+  return new Date(currentDate);
+};
+
+export const isTaskExpiredToday = (dueDate) => {
+  if (dueDate === null) {
+    return false;
+  }
+
+  const currentDate = getCurrentDay();
+
+  return currentDate.getTime() === dueDate.getTime();
 };
