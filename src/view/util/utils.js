@@ -43,3 +43,10 @@ export const isTaskExpiredToday = (dueDate) => {
 export const getRandomBoolean = () => {
   return Boolean(getRandomInteger(0, 1));
 };
+
+export const getRandomIndexOfArray = (array) => {
+  let start = 0;
+  let end = array.length - 1;
+
+  return getRandomInteger(start, end);
+};

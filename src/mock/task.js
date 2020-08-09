@@ -1,9 +1,10 @@
 import {COLORS, DESCRIPTIONS, MAX_DAYS_GAP} from "../const.js";
 import {getRandomInteger} from "../view/util/utils.js";
 import {getRandomBoolean} from "../view/util/utils";
+import {getRandomIndexOfArray} from "../view/util/utils";
 
 const generateDescription = () => {
-  const randomIndex = getRandomInteger(0, DESCRIPTIONS.length - 1);
+  const randomIndex = getRandomIndexOfArray(DESCRIPTIONS);
 
   return DESCRIPTIONS[randomIndex];
 };
@@ -37,7 +38,7 @@ const generateRepeating = () => {
 };
 
 const getRandomColor = () => {
-  const randomIndex = getRandomInteger(0, COLORS.length - 1);
+  const randomIndex = getRandomIndexOfArray(COLORS);
 
   return COLORS[randomIndex];
 };
