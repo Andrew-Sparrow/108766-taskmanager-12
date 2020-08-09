@@ -9,7 +9,7 @@ const generateDescription = () => {
   return DESCRIPTIONS[randomIndex];
 };
 
-const generateDate = () => {
+const getCurrentDate = () => {
   const isDate = getRandomBoolean();
 
   if (!isDate) {
@@ -44,7 +44,7 @@ const getRandomColor = () => {
 };
 
 export const generateTask = () => {
-  const dueDate = generateDate();
+  const dueDate = getCurrentDate();
   const repeating = dueDate === null ?
     generateRepeating() :
     {
