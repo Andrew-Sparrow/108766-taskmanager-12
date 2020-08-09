@@ -1,11 +1,5 @@
-import {COLORS} from "../const.js";
+import {COLORS, DESCRIPTIONS} from "../const.js";
 import {getRandomInteger} from "../view/util/utils.js";
-
-const DESCRIPTIONS = [
-  `Изучить теорию`,
-  `Сделать домашку`,
-  `Пройти интенсив на соточку`
-];
 
 const generateDescription = () => {
   const randomIndex = getRandomInteger(0, DESCRIPTIONS.length - 1);
