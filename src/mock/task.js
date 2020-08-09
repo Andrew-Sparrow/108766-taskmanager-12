@@ -1,5 +1,6 @@
 import {COLORS, DESCRIPTIONS, MAX_DAYS_GAP} from "../const.js";
 import {getRandomInteger} from "../view/util/utils.js";
+import {getRandomBoolean} from "../view/util/utils";
 
 const generateDescription = () => {
   const randomIndex = getRandomInteger(0, DESCRIPTIONS.length - 1);
@@ -8,7 +9,7 @@ const generateDescription = () => {
 };
 
 const generateDate = () => {
-  const isDate = Boolean(getRandomInteger(0, 1));
+  const isDate = getRandomBoolean();
 
   if (!isDate) {
     return null;
@@ -27,9 +28,9 @@ const generateRepeating = () => {
   return {
     mo: false,
     tu: false,
-    we: Boolean(getRandomInteger(0, 1)),
+    we: getRandomBoolean(),
     th: false,
-    fr: Boolean(getRandomInteger(0, 1)),
+    fr: getRandomBoolean(),
     sa: false,
     su: false
   };
@@ -60,7 +61,7 @@ export const generateTask = () => {
     dueDate,
     repeating,
     color: getRandomColor(),
-    isArchive: Boolean(getRandomInteger(0, 1)),
-    isFavorite: Boolean(getRandomInteger(0, 1))
+    isArchive: getRandomBoolean(),
+    isFavorite: getRandomBoolean()
   };
 };

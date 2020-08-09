@@ -39,3 +39,7 @@ export const isTaskExpiredToday = (dueDate) => {
 
   return currentDate.getTime() === dueDate.getTime();
 };
+
+export const getRandomBoolean = () => {
+  return Boolean(getRandomInteger(0, 1));
+};
