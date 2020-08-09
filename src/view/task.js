@@ -53,7 +53,7 @@ export const createTaskTemplate = (task) => {
 
                 <div class="card__settings">
                   <div class="card__details">
-                  <!-- Без дедлайна пустой блок-->
+                  <!-- empty block without deadline-->
                     ${date ? `<div class="card__dates">
                       <div class="card__date-deadline">
                         <p class="card__input-deadline-wrap">
