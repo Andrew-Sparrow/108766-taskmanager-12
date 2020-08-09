@@ -11,7 +11,7 @@ const createFilterItemTemplate = (filter, isChecked) => {
          ${count === 0 ? `disabled` : ``}
        />
        <label for="filter__${name}" class="filter__label">
-         ${name}<span class="filter__${name}-count">${count}</span>
+         ${name}<span class="filter__${name}-count"> ${count}</span>
        </label>
      `);
 };
