@@ -1,4 +1,4 @@
-import {COLORS, DESCRIPTIONS} from "../const.js";
+import {COLORS, DESCRIPTIONS, MAX_DAYS_GAP} from "../const.js";
 import {getRandomInteger} from "../view/util/utils.js";
 
 const generateDescription = () => {
@@ -14,8 +14,7 @@ const generateDate = () => {
     return null;
   }
 
-  const maxDaysGap = 7;
-  const daysGap = getRandomInteger(-maxDaysGap, maxDaysGap);
+  const daysGap = getRandomInteger(-MAX_DAYS_GAP, MAX_DAYS_GAP);
   const currentDate = new Date();
 
   currentDate.setHours(23, 59, 59, 999);
