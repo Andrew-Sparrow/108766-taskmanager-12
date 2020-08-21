@@ -1,6 +1,6 @@
 import {TASK_COUNT, TASK_COUNT_PER_STEP} from "./const";
 import {createSiteMenuTemplate} from "./view/site-menu.js";
-import {createFilterTemplate} from "./view/filter.js";
+import FilterView from "./view/filter.js";
 import {createTaskTemplate} from "./view/task.js";
 import BoardView from "./view/board.js";
 import {createTaskEditTemplate} from "./view/task-edit.js";
@@ -22,8 +22,8 @@ const filters = generateFilter(tasks);
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
-renderTemplate(siteHeaderElement, createSiteMenuTemplate(), `beforeend`);
-renderTemplate(siteMainElement, createFilterTemplate(filters), `beforeend`);
+renderElement(siteHeaderElement, new SiteMenuView().getElement(), RenderPosition.BEFOREEND);
+renderElement(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardView();
 renderElement(siteMainElement, boardComponent.getElement(), RenderPosition.BEFOREEND);
