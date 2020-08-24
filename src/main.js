@@ -4,14 +4,14 @@ import {
 } from "./const";
 
 import SiteMenuView from "./view/site-menu.js";
-import {createFilterTemplate} from "./view/filter.js";
 import FilterView from "./view/filter.js";
-import {createTaskTemplate} from "./view/task.js";
+import TaskView from "./view/task.js";
 import BoardView from "./view/board.js";
 import SortView from "./view/sort";
 import TaskListView from "./view/task-list";
 import LoadMoreButtonView from "./view/load-more-button";
-import {createTaskEditTemplate} from "./view/task-edit.js";
+// import {createTaskEditTemplate} from "./view/task-edit.js";
+import TaskEditView from "./view/task-edit.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter";
 import {
@@ -27,7 +27,6 @@ const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
 renderElement(siteHeaderElement, new SiteMenuView().getElement(), RenderPosition.BEFOREEND);
-// renderTemplate(siteMainElement, createFilterTemplate(filters), `beforeend`);
 renderElement(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardView();
@@ -39,10 +38,10 @@ const taskListComponent = new TaskListView();
 
 renderElement(boardComponent.getElement(), taskListComponent.getElement(), RenderPosition.BEFOREEND);
 
-renderTemplate(taskListComponent.getElement(), createTaskEditTemplate(tasks[0]), RenderPosition.BEFOREEND);
+renderElement(taskListComponent.getElement(), new TaskEditView(tasks[0]).getElement(), RenderPosition.BEFOREEND);
 
 for (let i = 1; i < Math.min(tasks.length, TASK_COUNT); i++) {
-  renderTemplate(taskListComponent.getElement(), createTaskTemplate(tasks[i]), `beforeend`);
+  renderElement(taskListComponent.getElement(), new TaskView(tasks[i]).getElement(), RenderPosition.BEFOREEND);
 }
 
 if (tasks.length > TASK_COUNT_PER_STEP) {
@@ -56,7 +55,7 @@ if (tasks.length > TASK_COUNT_PER_STEP) {
     evt.preventDefault();
     tasks
       .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
-      .forEach((task) => renderTemplate(taskListComponent.getElement(), createTaskTemplate(task), `beforeend`));
+      .forEach((task) => renderElement(taskListComponent.getElement(), new TaskView(task).getElement(), RenderPosition.BEFOREEND));
 
     renderedTaskCount += TASK_COUNT_PER_STEP;
 
