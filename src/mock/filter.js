@@ -1,4 +1,8 @@
-import {isTaskExpired, isTaskRepeating, isTaskExpiredToday} from "../view/util/utils";
+import {
+  isTaskExpired,
+  isTaskRepeating,
+  isTaskExpiredToday
+} from "../view/util/utils";
 
 export const generateFilter = (tasks) => {
   return Object.entries(taskToFilterMap).map(([filterName, countTask]) => {
