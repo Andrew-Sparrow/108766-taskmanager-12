@@ -1,4 +1,6 @@
+
 import {createElement} from "./util/utils";
+
 
 const createFilterItemTemplate = (filter, isChecked) => {
   const {name, count} = filter;
@@ -34,11 +36,13 @@ export default class Filter {
     this._element = null;
   }
 
+
   getTemplate() {
     return createFilterTemplate(this._filters);
   }
 
   getElement() {
+
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
@@ -47,6 +51,7 @@ export default class Filter {
   }
 
   removeElement() {
+
     this._element = null;
   }
 }

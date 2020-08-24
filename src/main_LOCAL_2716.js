@@ -12,6 +12,7 @@ import TaskListView from "./view/task-list";
 import LoadMoreButtonView from "./view/load-more-button";
 import TaskEditView from "./view/task-edit.js";
 import NoTaskView from "./view/no-task";
+
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter";
 import {
@@ -58,6 +59,7 @@ const renderTask = (taskListElement, task) => {
 
   render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
 };
+
 
 const renderBoard = (boardContainer, boardTasks) => {
   const boardComponent = new BoardView();
