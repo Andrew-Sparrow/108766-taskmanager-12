@@ -8,7 +8,8 @@ import LoadMoreButtonView from "../view/load-more-button.js";
 
 import {
   render,
-  RenderPosition
+  RenderPosition,
+  replace
 } from "../view/util/render.js";
 
 const TASK_COUNT_PER_STEP = 8;
@@ -36,8 +37,37 @@ export default class Board {
     render(this._boardComponent, this._sortComponent, RenderPosition.AFTERBEGIN);
   }
 
-  _renderTask() {
+  _renderTask(task) {
+    const taskComponent = new TaskView(task);
+    const taskEditComponent = new TaskEditView(task);
 
+    const replaceCardToForm = () => {
+      replace(taskEditComponent, taskComponent);
+    };
+
+    const replaceFormToCard = () => {
+      replace(taskComponent, taskEditComponent);
+    };
+
+    const onEscKeyDown = (evt) => {
+      if (evt.key === `Escape` || evt.key === `Esc`) {
+        evt.preventDefault();
+        replaceFormToCard();
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      }
+    };
+
+    taskComponent.setEditClickHandler(() => {
+      replaceCardToForm();
+      document.addEventListener(`keydown`, onEscKeyDown);
+    });
+
+    taskEditComponent.setFormSubmitHandler(() => {
+      replaceFormToCard();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    });
+
+    render(this._taskListComponent, taskComponent, RenderPosition.BEFOREEND);
   }
 
   _renderTasks(from, to) {
