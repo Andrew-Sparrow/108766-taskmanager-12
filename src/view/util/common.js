@@ -12,8 +12,8 @@ export const getRandomBoolean = () => {
 };
 
 export const getRandomIndexOfArray = (array) => {
-  let start = 0;
-  let end = array.length - 1;
+  const start = 0;
+  const end = array.length - 1;
 
   return getRandomInteger(start, end);
 };
