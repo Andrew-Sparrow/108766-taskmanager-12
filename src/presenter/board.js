@@ -25,6 +25,7 @@ export default class Board {
     this._taskListComponent = new TaskListView();
     this._noTaskComponent = new NoTaskView();
     this._loadMoreButtonComponent = new LoadMoreButtonView();
+    this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
 
     this._handleLoadMoreButtonClick = this._handleLoadMoreButtonClick.bind(this);
   }
@@ -38,8 +39,15 @@ export default class Board {
     this._renderBoard();
   }
 
+  _handleSortTypeChange(sortType) {
+    // - Сортируем задачи
+    // - Очищаем список
+    // - Рендерим список заново
+  }
+
   _renderSort() {
     render(this._boardComponent, this._sortComponent, RenderPosition.AFTERBEGIN);
+    this._sortComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
   }
 
   _renderTask(task) {
