@@ -9,7 +9,8 @@ import LoadMoreButtonView from "../view/load-more-button.js";
 import {
   render,
   RenderPosition,
-  replace
+  replace,
+  remove
 } from "../view/util/render.js";
 
 const TASK_COUNT_PER_STEP = 8;
@@ -81,8 +82,23 @@ export default class Board {
   }
 
   _renderLoadMoreButton() {
-    // Метод, куда уйдёт логика по отрисовке компонетов задачи,
-    // текущая функция renderTask в main.js
+    let renderedTaskCount = TASK_COUNT_PER_STEP;
+
+    const loadMoreButtonComponent = new LoadMoreButtonView();
+
+    render(this._boardComponent, loadMoreButtonComponent, RenderPosition.BEFOREEND);
+
+    loadMoreButtonComponent.setClickHandler(() => {
+      this._boardTasks
+        .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
+        .forEach((boardTask) => this._renderTask(boardTask));
+
+      renderedTaskCount += TASK_COUNT_PER_STEP;
+
+      if (renderedTaskCount >= this._boardTasks.length) {
+        remove(loadMoreButtonComponent);
+      }
+    });
   }
 
   _renderBoard() {
