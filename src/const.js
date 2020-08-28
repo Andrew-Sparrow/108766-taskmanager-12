@@ -14,5 +14,8 @@ export const DESCRIPTIONS = [
 
 export const MAX_DAYS_GAP = 7;
 
-export const TASK_COUNT = 6;
-export const TASK_COUNT_PER_STEP = 5;
+export const SortType = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  DATE_UP: `date-up`
+};
