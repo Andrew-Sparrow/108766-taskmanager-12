@@ -1,7 +1,9 @@
 import {COLORS, DESCRIPTIONS, MAX_DAYS_GAP} from "../const.js";
-import {getRandomInteger} from "../view/util/utils.js";
-import {getRandomBoolean} from "../view/util/utils";
-import {getRandomIndexOfArray} from "../view/util/utils";
+import {
+  getRandomInteger,
+  getRandomIndexOfArray,
+  getRandomBoolean
+} from "../view/util/common.js";
 
 const generateDescription = () => {
   const randomIndex = getRandomIndexOfArray(DESCRIPTIONS);
