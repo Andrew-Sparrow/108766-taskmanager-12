@@ -45,13 +45,12 @@ const renderTask = (taskListElement, task) => {
     }
   };
 
-  taskComponent.getElement().querySelector(`.card__btn--edit`).addEventListener(`click`, () => {
+  taskComponent.setEditClickHandler(() => {
     replaceCardToForm();
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
-  taskEditComponent.getElement().querySelector(`form`).addEventListener(`submit`, (evt) => {
-    evt.preventDefault();
+  taskEditComponent.setFormSubmitHandler(() => {
     replaceFormToCard();
     document.removeEventListener(`keydown`, onEscKeyDown);
   });
@@ -66,7 +65,7 @@ const renderBoard = (boardContainer, boardTasks) => {
   render(boardContainer, boardComponent.getElement(), RenderPosition.BEFOREEND);
   render(boardComponent.getElement(), taskListComponent.getElement(), RenderPosition.BEFOREEND);
 
-  if (tasks.every((task) => task.isArchive)) {
+  if (boardTasks.every((task) => task.isArchive)) {
     render(boardComponent.getElement(), new NoTaskView().getElement(), RenderPosition.AFTERBEGIN);
     return;
   }
@@ -77,18 +76,17 @@ const renderBoard = (boardContainer, boardTasks) => {
     .slice(0, Math.min(tasks.length, TASK_COUNT_PER_STEP))
     .forEach((boardTask) => renderTask(taskListComponent.getElement(), boardTask));
 
-  if (tasks.length > TASK_COUNT_PER_STEP) {
+  if (boardTasks.length > TASK_COUNT_PER_STEP) {
     let renderedTaskCount = TASK_COUNT_PER_STEP;
 
     const loadMoreButtonComponent = new LoadMoreButtonView();
 
     render(boardComponent.getElement(), loadMoreButtonComponent.getElement(), RenderPosition.BEFOREEND);
 
-    loadMoreButtonComponent.getElement().addEventListener(`click`, (evt) => {
-      evt.preventDefault();
-      tasks
+    loadMoreButtonComponent.setClickHandler(() => {
+      boardTasks
         .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
-        .forEach((task) => renderTask(taskListComponent.getElement(), task));
+        .forEach((boardTask) => renderTask(taskListComponent.getElement(), boardTask));
 
       renderedTaskCount += TASK_COUNT_PER_STEP;
 
