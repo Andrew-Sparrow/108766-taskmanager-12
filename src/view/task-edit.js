@@ -176,6 +176,16 @@ export default class TaskEdit extends AbstractView {
     this._callback.formSubmit(TaskEdit.parseDataToTask(this._data));
   }
 
+  updateData(update) {
+    if (!update) {
+      return;
+    }
+
+    this._data = Object.assign({}, this._data, update);
+
+    this.updateElement();
+  }
+
   setFormSubmitHandler(callback) {
     this._callback.formSubmit = callback;
     this.getElement().querySelector(`form`).addEventListener(`submit`, this._formSubmitHandler);
