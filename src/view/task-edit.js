@@ -1,4 +1,4 @@
-import AbstractView from "./abstract.js";
+import SmartView from "./smart.js";
 
 import {COLORS} from "../const";
 
@@ -150,7 +150,7 @@ export const createTaskEditTemplate = (data) => {
           </article>`);
 };
 
-export default class TaskEdit extends AbstractView {
+export default class TaskEdit extends SmartView {
   constructor(task = Object.assign({}, BLANK_TASK)) {
     super();
     this._data = TaskEdit.parseTaskToData(task);
@@ -167,19 +167,6 @@ export default class TaskEdit extends AbstractView {
 
   getTemplate() {
     return createTaskEditTemplate(this._data);
-  }
-
-  updateElement() {
-    let prevElement = this.getElement();
-    const parent = prevElement.parentElement;
-    this.removeElement();
-
-    const newElement = this.getElement();
-
-    parent.replaceChild(newElement, prevElement);
-    prevElement = null; // Чтобы окончательно "убить" ссылку на prevElement
-
-    this.restoreHandlers();
   }
 
   restoreHandlers() {
@@ -255,20 +242,6 @@ export default class TaskEdit extends AbstractView {
   _formSubmitHandler(evt) {
     evt.preventDefault();
     this._callback.formSubmit(TaskEdit.parseDataToTask(this._data));
-  }
-
-  updateData(update, justDataUpdating) {
-    if (!update) {
-      return;
-    }
-
-    this._data = Object.assign({}, this._data, update);
-
-    if (justDataUpdating) {
-      return;
-    }
-
-    this.updateElement();
   }
 
   setFormSubmitHandler(callback) {
