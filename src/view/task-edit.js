@@ -4,7 +4,6 @@ import {COLORS} from "../const";
 
 
 import {
-  isTaskExpired,
   isTaskRepeating,
   humanizeTaskDueDate,
 } from "./util/task.js";
@@ -94,10 +93,6 @@ export const createTaskEditTemplate = (data) => {
 
   const {color, description, dueDate, repeating, isDueDate, isRepeating} = data;
 
-  const deadLineClassName = isTaskExpired(dueDate)
-    ? `card--deadLine`
-    : ``;
-
   const dateTemplate = createTaskEditDateTemplate(dueDate, isDueDate);
 
   const repeatingClassName = isRepeating
@@ -108,9 +103,9 @@ export const createTaskEditTemplate = (data) => {
 
   const colorsTemplate = createTaskEditColorsTemplate(color);
 
-  const isSubmitDisabled = isRepeating && !isTaskRepeating(repeating);
+  const isSubmitDisabled = (isDueDate && dueDate === null) || (isRepeating && !isTaskRepeating(repeating));
 
-  return (`<article class="card card--edit ${color} ${deadLineClassName} ${repeatingClassName}">
+  return (`<article class="card card--edit ${color} ${repeatingClassName}">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__color-bar">
@@ -170,6 +165,7 @@ export default class TaskEdit extends SmartView {
     this._colorChangeHandler = this._colorChangeHandler.bind(this);
 
     this._setInnerHandlers();
+    this._setDatepicker();
   }
 
   reset(task) {
@@ -182,6 +178,7 @@ export default class TaskEdit extends SmartView {
 
   restoreHandlers() {
     this._setInnerHandlers();
+    this._setDatepicker();
     this.setFormSubmitHandler(this._callback.formSubmit);
   }
 
