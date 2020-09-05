@@ -9,6 +9,11 @@ import {
   humanizeTaskDueDate,
 } from "./util/task.js";
 
+import flatpickr from "flatpickr";
+
+import "../../node_modules/flatpickr/dist/flatpickr.min.css";
+
+
 const BLANK_TASK = {
   color: COLORS[0],
   description: ``,
