@@ -45,7 +45,6 @@ export default class Task {
     this._taskEditComponent.setFormSubmitHandler(this._handleFormSubmit);
 
     if (prevTaskComponent === null || prevTaskEditComponent === null) {
-      console.log(`prevTaskComponent === null`);
       render(this._taskListContainer, this._taskComponent, RenderPosition.BEFOREEND);
       return;
     }
@@ -53,7 +52,6 @@ export default class Task {
     // Проверка на наличие в DOM необходима,
     // чтобы не пытаться заменить то, что не было отрисовано
     if (this._mode === Mode.DEFAULT) {
-      console.log(`replace`);
       replace(this._taskComponent, prevTaskComponent);
     }
 

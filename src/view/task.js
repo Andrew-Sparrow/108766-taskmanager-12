@@ -3,7 +3,7 @@ import AbstractView from "./abstract.js";
 import {
   isTaskExpired,
   isTaskRepeating,
-  humanizeTaskDueDate,
+  formatTaskDueDate,
 } from "./util/task.js";
 
 export const createTaskTemplate = (task) => {
@@ -16,9 +16,7 @@ export const createTaskTemplate = (task) => {
     isFavorite
   } = task;
 
-  const date = dueDate !== null
-    ? humanizeTaskDueDate(dueDate)
-    : ``;
+  const date = formatTaskDueDate(dueDate);
 
   const deadLineClassName = isTaskExpired(dueDate)
     ? `card--deadLine`
