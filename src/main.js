@@ -3,7 +3,7 @@ import FilterView from "./view/filter.js";
 import BoardPresenter from "./presenter/board.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter";
-import TasksModel from "./model/task-model.js";
+import TasksModel from "./model/tasks-model.js";
 
 import {
   render,
