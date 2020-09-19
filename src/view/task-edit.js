@@ -85,13 +85,19 @@ const createTaskEditColorsTemplate = (currentColor) => {
       <label
         for="color-${color}"
         class="card__color card__color--black"
-        >black</label
-      >`).join(``);
+        >black</label>`).join(``);
 };
 
 export const createTaskEditTemplate = (data) => {
 
-  const {color, description, dueDate, repeating, isDueDate, isRepeating} = data;
+  const {
+    color,
+    description,
+    dueDate,
+    repeating,
+    isDueDate,
+    isRepeating
+  } = data;
 
   const dateTemplate = createTaskEditDateTemplate(dueDate, isDueDate);
 
@@ -270,7 +276,8 @@ export default class TaskEdit extends SmartView {
   _repeatingChangeHandler(evt) {
     evt.preventDefault();
     this.updateData({
-      repeating: Object.assign({}, this._data.repeating, {[evt.target.value]: evt.target.checked})});
+      repeating: Object.assign({}, this._data.repeating, {[evt.target.value]: evt.target.checked})
+    });
   }
 
   _colorChangeHandler(evt) {
@@ -289,8 +296,13 @@ export default class TaskEdit extends SmartView {
     this._callback.formSubmit = callback;
     this.getElement().querySelector(`form`).addEventListener(`submit`, this._formSubmitHandler);
   }
+
   static parseTaskToData(task) {
-    return Object.assign({}, task, {isDueDate: task.dueDate !== null, isRepeating: isTaskRepeating(task.repeating)});
+    return Object.assign({},
+        task, {
+          isDueDate: task.dueDate !== null,
+          isRepeating: isTaskRepeating(task.repeating)
+        });
   }
 
   static parseDataToTask(data) {
