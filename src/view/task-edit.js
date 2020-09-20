@@ -1,4 +1,5 @@
 import SmartView from "./smart.js";
+import he from "he";
 
 import {COLORS} from "../const";
 
@@ -126,7 +127,7 @@ export const createTaskEditTemplate = (data) => {
                       class="card__text"
                       placeholder="Start typing your text here..."
                       name="text"
-                    >${description}</textarea>
+                    >>${he.encode(description)}</textarea>
                   </label>
                 </div>
 
