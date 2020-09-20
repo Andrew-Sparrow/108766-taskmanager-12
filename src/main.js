@@ -1,9 +1,9 @@
 import SiteMenuView from "./view/site-menu.js";
 import BoardPresenter from "./presenter/board.js";
 import FilterPresenter from "./presenter/filter.js";
-import {generateTask} from "./mock/task.js";
 import TasksModel from "./model/tasks-model.js";
 import FilterModel from "./model/filter-model.js";
+import {generateTask} from "./mock/task.js";
 
 import {
   render,
@@ -13,7 +13,6 @@ import {
 const TASK_COUNT = 22;
 
 const tasks = new Array(TASK_COUNT).fill().map(generateTask);
-
 
 const tasksModel = new TasksModel();
 tasksModel.setTasks(tasks);
@@ -32,3 +31,8 @@ const filterPresenter = new FilterPresenter(siteMainElement, filterModel, tasksM
 filterPresenter.init();
 
 boardPresenter.init();
+
+document.querySelector(`#control__new-task`).addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  boardPresenter.createTask();
+});

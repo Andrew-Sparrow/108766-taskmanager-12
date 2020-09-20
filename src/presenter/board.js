@@ -4,6 +4,7 @@ import TaskListView from "../view/task-list.js";
 import NoTaskView from "../view/no-task.js";
 import LoadMoreButtonView from "../view/load-more-button.js";
 import TaskPresenter from "./task.js";
+import TaskNewPresenter from "./task-new.js";
 
 import {filter} from "../utils/filter.js";
 
@@ -15,7 +16,8 @@ import {
 import {
   SortType,
   UpdateTypeForRerender,
-  UserActionForModel
+  UserActionForModel,
+  FilterType
 } from "../const.js";
 
 import {
@@ -53,6 +55,8 @@ export default class Board {
 
     this._tasksModel.addObserver(this._handleModelEvent);
     this._filterModel.addObserver(this._handleModelEvent);
+
+    this._taskNewPresenter = new TaskNewPresenter(this._taskListComponent, this._handleViewAction);
   }
 
   init() {
@@ -62,7 +66,15 @@ export default class Board {
     this._renderBoard();
   }
 
+  createTask() {
+    this._currentSortType = SortType.DEFAULT;
+    this._filterModel.setFilter(UpdateTypeForRerender.MAJOR, FilterType.ALL);
+    this._taskNewPresenter.init();
+  }
+
   _handleModeChange() {
+    this._taskNewPresenter.destroy();
+
     Object
       .values(this._taskPresenter)
       .forEach((presenter) => presenter.resetView());
@@ -127,9 +139,12 @@ export default class Board {
   }
 
   _handleSortTypeChange(sortType) {
+    if (this._currentSortType === sortType) {
+      return;
+    }
     this._currentSortType = sortType;
-    this._clearTaskList();
-    this._renderTaskList();
+    this._clearBoard({resetRenderedTaskCount: true});
+    this._renderBoard();
   }
 
   _renderSort() {
@@ -184,6 +199,8 @@ export default class Board {
 
   _clearBoard({resetRenderedTaskCount = false, resetSortType = false} = {}) {
     const taskCount = this._getTasks().length;
+
+    this._taskNewPresenter.destroy();
 
     Object
       .values(this._taskPresenter)
