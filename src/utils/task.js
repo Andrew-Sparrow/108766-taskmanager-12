@@ -17,7 +17,7 @@ export const isTaskExpired = (dueDate) => {
   return moment(currentDate).isAfter(dueDate, `day`);
 };
 
-export const isTaskExpiredToday = (dueDate) => {
+export const isTaskExpiringToday = (dueDate) => {
   if (dueDate === null) {
     return false;
   }
