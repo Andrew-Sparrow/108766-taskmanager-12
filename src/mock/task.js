@@ -3,7 +3,7 @@ import {
   getRandomInteger,
   getRandomIndexOfArray,
   getRandomBoolean
-} from "../view/util/common.js";
+} from "../utils/common.js";
 
 // Date.now() и Math.random() - плохие решения для генерации id
 // в "продуктовом" коде, а для моков самое то.

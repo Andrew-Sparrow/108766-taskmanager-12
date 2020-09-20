@@ -6,7 +6,7 @@ import {COLORS} from "../const";
 import {
   isTaskRepeating,
   formatTaskDueDate,
-} from "./util/task.js";
+} from "../utils/task.js";
 
 import flatpickr from "flatpickr";
 

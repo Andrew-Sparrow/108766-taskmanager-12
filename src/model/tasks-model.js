@@ -14,8 +14,8 @@ export default class TasksModel extends Observer {
     return this._tasks;
   }
 
-  updateTask(updateType, update) {
-    const index = this._tasks.findIndex((task) => task.id === update.id);
+  updateTask(updateTypeForRerender, updatedItem) {
+    const index = this._tasks.findIndex((task) => task.id === updatedItem.id);
 
     if (index === -1) {
       throw new Error(`Can't update nonexistent task`);
@@ -23,24 +23,24 @@ export default class TasksModel extends Observer {
 
     this._tasks = [
       ...this._tasks.slice(0, index),
-      update,
+      updatedItem,
       ...this._tasks.slice(index + 1)
     ];
 
-    this._notify(updateType, update);
+    this._notify(updateTypeForRerender, updatedItem);
   }
 
-  addTask(updateType, update) {
+  addTask(updateTypeForRerender, updatedItem) {
     this._tasks = [
-      update,
+      updatedItem,
       ...this._tasks
     ];
 
-    this._notify(updateType, update);
+    this._notify(updateTypeForRerender, updatedItem);
   }
 
-  deleteTask(updateType, update) {
-    const index = this._tasks.findIndex((task) => task.id === update.id);
+  deleteTask(updateTypeForRerender, updatedItem) {
+    const index = this._tasks.findIndex((task) => task.id === updatedItem.id);
 
     if (index === -1) {
       throw new Error(`Can't delete unexisting task`);
@@ -51,6 +51,6 @@ export default class TasksModel extends Observer {
       ...this._tasks.slice(index + 1)
     ];
 
-    this._notify(updateType);
+    this._notify(updateTypeForRerender);
   }
 }

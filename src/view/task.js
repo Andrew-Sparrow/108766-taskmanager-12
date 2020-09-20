@@ -4,7 +4,7 @@ import {
   isTaskExpired,
   isTaskRepeating,
   formatTaskDueDate,
-} from "./util/task.js";
+} from "../utils/task.js";
 
 export const createTaskTemplate = (task) => {
   const {

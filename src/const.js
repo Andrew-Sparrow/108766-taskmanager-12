@@ -20,13 +20,13 @@ export const SortType = {
   DATE_UP: `date-up`
 };
 
-export const UserAction = {
+export const UserActionForModel = {
   UPDATE_TASK: `UPDATE_TASK`,
   ADD_TASK: `ADD_TASK`,
   DELETE_TASK: `DELETE_TASK`
 };
 
-export const UpdateType = {
+export const UpdateTypeForRerender = {
   PATCH: `PATCH`,
   MINOR: `MINOR`,
   MAJOR: `MAJOR`

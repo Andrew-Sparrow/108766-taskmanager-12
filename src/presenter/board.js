@@ -8,15 +8,19 @@ import TaskPresenter from "./task.js";
 import {
   sortTaskDown,
   sortTaskUp
-} from "../view/util/task.js";
+} from "../utils/task.js";
 
-import {SortType} from "../const.js";
+import {
+  SortType,
+  UpdateTypeForRerender,
+  UserActionForModel
+} from "../const.js";
 
 import {
   render,
   RenderPosition,
   remove
-} from "../view/util/render.js";
+} from "../utils/render.js";
 
 const TASK_COUNT_PER_STEP = 8;
 
@@ -58,20 +62,41 @@ export default class Board {
       .forEach((presenter) => presenter.resetView());
   }
 
-  _handleViewAction(actionType, updateType, update) {
-    console.log(actionType, updateType, update);
+  _handleViewAction(actionTypeForModel, updateTypeForRerender, updatedData) {
     // Здесь будем вызывать обновление модели.
     // actionType - действие пользователя, нужно чтобы понять, какой метод модели вызвать
     // updateType - тип изменений, нужно чтобы понять, что после нужно обновить
     // update - обновленные данные
+    switch (actionTypeForModel) {
+      case UserActionForModel.UPDATE_TASK:
+        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        break;
+      case UserActionForModel.ADD_TASK:
+        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        break;
+      case UserActionForModel.DELETE_TASK:
+        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        break;
+    }
   }
 
-  _handleModelEvent(updateType, data) {
-    console.log(updateType, data);
+  _handleModelEvent(updateTypeForRerender, data) {
     // В зависимости от типа изменений решаем, что делать:
     // - обновить часть списка (например, когда поменялось описание)
     // - обновить список (например, когда задача ушла в архив)
     // - обновить всю доску (например, при переключении фильтра)
+    switch (updateTypeForRerender) {
+      case UpdateTypeForRerender.PATCH:
+        // - обновить часть списка (например, когда поменялось описание)
+        this._taskPresenter[data.id].init(data);
+        break;
+      case UpdateTypeForRerender.MINOR:
+        // - обновить список (например, когда задача ушла в архив)
+        break;
+      case UpdateTypeForRerender.MAJOR:
+        // - обновить всю доску (например, при переключении фильтра)
+        break;
+    }
   }
 
   _getTasks() {

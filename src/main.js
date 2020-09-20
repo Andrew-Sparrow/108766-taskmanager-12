@@ -8,7 +8,7 @@ import TasksModel from "./model/tasks-model.js";
 import {
   render,
   RenderPosition,
-} from "./view/util/render.js";
+} from "./utils/render.js";
 
 const TASK_COUNT = 22;
 
