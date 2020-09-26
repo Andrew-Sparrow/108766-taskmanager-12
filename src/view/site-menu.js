@@ -42,6 +42,7 @@ export default class SiteMenu extends AbstractView {
 
     this._menuClickHandler = this._menuClickHandler.bind();
   }
+
   getTemplate() {
     return createSiteMenuTemplate();
   }
@@ -57,7 +58,7 @@ export default class SiteMenu extends AbstractView {
   }
 
   setMenuItem(menuItem) {
-    const item = this.getElement(`[value=${menuItem}]`);
+    const item = this.getElement().querySelector(`[value=${menuItem}]`);
 
     if (item !== null) {
       item.checked = true;

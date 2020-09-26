@@ -4,7 +4,11 @@ import FilterPresenter from "./presenter/filter.js";
 import TasksModel from "./model/tasks-model.js";
 import FilterModel from "./model/filter-model.js";
 import {generateTask} from "./mock/task.js";
-import {MenuItem} from "./const.js";
+import {
+  MenuItem,
+  UpdateTypeForRerender,
+  FilterType
+} from "./const.js";
 
 import {
   render,
@@ -37,12 +41,17 @@ const handleTaskNewFormClose = () => {
 const handleSiteMenuClick = (menuItem) => {
   switch (menuItem) {
     case MenuItem.ADD_NEW_TASK:
-      boardPresenter.createTask(handleSiteMenuClick());
+      boardPresenter.destroy();
+      filterModel.setFilter(UpdateTypeForRerender.MAJOR, FilterType.ALL);
+      boardPresenter.init();
+      boardPresenter.createTask(handleTaskNewFormClose);
       siteMenuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = true;
       break;
     case MenuItem.TASKS:
+      boardPresenter.init();
       break;
     case menuItem.STATISTICS:
+      boardPresenter.destroy();
       break;
   }
 };
