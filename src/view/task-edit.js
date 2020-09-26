@@ -85,8 +85,8 @@ const createTaskEditColorsTemplate = (currentColor) => {
       />
       <label
         for="color-${color}"
-        class="card__color card__color--black"
-        >black</label>`).join(``);
+        class="card__color card__color--${color}"
+        >${color}</label>`).join(``);
 };
 
 export const createTaskEditTemplate = (data) => {
@@ -112,7 +112,7 @@ export const createTaskEditTemplate = (data) => {
 
   const isSubmitDisabled = (isDueDate && dueDate === null) || (isRepeating && !isTaskRepeating(repeating));
 
-  return (`<article class="card card--edit ${color} ${repeatingClassName}">
+  return (`<article class="card card--edit card--${color} ${repeatingClassName}">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__color-bar">
@@ -127,7 +127,7 @@ export const createTaskEditTemplate = (data) => {
                       class="card__text"
                       placeholder="Start typing your text here..."
                       name="text"
-                    >>${he.encode(description)}</textarea>
+                    >${he.encode(description)}</textarea>
                   </label>
                 </div>
 

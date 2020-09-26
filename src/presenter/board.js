@@ -90,10 +90,10 @@ export default class Board {
         this._tasksModel.updateTask(updateTypeForRerender, updatedData);
         break;
       case UserActionForModel.ADD_TASK:
-        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        this._tasksModel.addTask(updateTypeForRerender, updatedData);
         break;
       case UserActionForModel.DELETE_TASK:
-        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        this._tasksModel.deleteTask(updateTypeForRerender, updatedData);
         break;
     }
   }

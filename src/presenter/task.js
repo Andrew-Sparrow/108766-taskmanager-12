@@ -147,6 +147,5 @@ export default class Task {
         UpdateTypeForRerender.MINOR,
         task
     );
-    this._replaceFormToCard();
   }
 }
