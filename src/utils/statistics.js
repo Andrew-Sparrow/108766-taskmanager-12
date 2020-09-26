@@ -1,4 +1,5 @@
 import moment from "moment";
+import {Color} from "../const.js";
 
 export const countCompletedTaskInDateRange = (tasks, dateFrom, dateTo) => {
   return tasks.reduce((counter, task) => {
@@ -16,4 +17,19 @@ export const countCompletedTaskInDateRange = (tasks, dateFrom, dateTo) => {
 
     return counter;
   }, 0);
+};
+
+export const colorToHex = {
+  [Color.BLACK]: `#000000`,
+  [Color.BLUE]: `#0c5cdd`,
+  [Color.GREEN]: `#31b55c`,
+  [Color.PINK]: `#ff3cb9`,
+  [Color.YELLOW]: `#ffe125`
+};
+
+// Используем особенности Set, чтобы удалить дубли в массиве
+export const makeItemsUniq = (items) => [...new Set(items)];
+
+export const countTasksByColor = (tasks, color) => {
+  return tasks.filter((task) => task.color === color).length;
 };
