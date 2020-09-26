@@ -36,11 +36,11 @@ const createSiteMenuTemplate = () => {
         </section>`);
 };
 
-export default class SiteMenu extends AbstractView {
+export default class SiteMenuView extends AbstractView {
   constructor() {
     super();
 
-    this._menuClickHandler = this._menuClickHandler.bind();
+    this._menuClickHandler = this._menuClickHandler.bind(this);
   }
 
   getTemplate() {
