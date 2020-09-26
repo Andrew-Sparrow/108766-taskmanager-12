@@ -3,7 +3,10 @@ import BoardPresenter from "./presenter/board.js";
 import FilterPresenter from "./presenter/filter.js";
 import TasksModel from "./model/tasks-model.js";
 import FilterModel from "./model/filter-model.js";
+import StatisticsView from "./view/statistics.js";
+
 import {generateTask} from "./mock/task.js";
+
 import {
   MenuItem,
   UpdateTypeForRerender,
@@ -60,4 +63,6 @@ siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
 
 filterPresenter.init();
 
-boardPresenter.init();
+// boardPresenter.init();
+
+render(siteMainElement, new StatisticsView(tasksModel.getTasks()), RenderPosition.BEFOREEND);
