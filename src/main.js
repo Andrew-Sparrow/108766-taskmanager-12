@@ -19,7 +19,7 @@ import {
   remove
 } from "./utils/render.js";
 
-const TASK_COUNT = 10;
+const TASK_COUNT = 22;
 
 const tasks = new Array(TASK_COUNT).fill().map(generateTask);
 
@@ -69,5 +69,4 @@ const handleSiteMenuClick = (menuItem) => {
 siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
 
 filterPresenter.init();
-
 boardPresenter.init();

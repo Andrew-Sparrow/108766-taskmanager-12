@@ -15,7 +15,6 @@ import {
 } from "../utils/statistics.js";
 
 const renderColorsChart = (colorsCtx, tasks) => {
-
   const taskColors = tasks.map((task) => task.color);
   const uniqColors = makeItemsUniq(taskColors);
   const taskByColorCounts = uniqColors.map((color) => countTasksByColor(tasks, color));
@@ -25,10 +24,10 @@ const renderColorsChart = (colorsCtx, tasks) => {
     plugins: [ChartDataLabels],
     type: `pie`,
     data: {
-      labels: uniqColors, // Сюда нужно передать названия уникальных цветов, они станут ярлыками
+      labels: uniqColors,
       datasets: [{
-        data: taskByColorCounts, // Сюда нужно передать в том же порядке количество задач по каждому цвету
-        backgroundColor: hexColors // Сюда нужно передать в том же порядке HEX каждого цвета
+        data: taskByColorCounts,
+        backgroundColor: hexColors
       }]
     },
     options: {
@@ -85,9 +84,9 @@ const renderDaysChart = (daysCtx, tasks, dateFrom, dateTo) => {
     plugins: [ChartDataLabels],
     type: `line`,
     data: {
-      labels: parsedDates, // Сюда нужно передать названия дней
+      labels: parsedDates,
       datasets: [{
-        data: taskInDateRangeCounts, // Сюда нужно передать в том же порядке количество задач по каждому дню
+        data: taskInDateRangeCounts,
         backgroundColor: `transparent`,
         borderColor: `#000000`,
         borderWidth: 1,
@@ -148,34 +147,28 @@ const createStatisticsTemplate = (data) => {
   const completedTaskCount = countCompletedTaskInDateRange(tasks, dateFrom, dateTo);
 
   return `<section class="statistic container">
-        <div class="statistic__line">
-          <div class="statistic__period">
-            <h2 class="statistic__period-title">Task Activity DIAGRAM</h2>
-
-            <div class="statistic-input-wrap">
-              <input
-                class="statistic__period-input"
-                type="text"
-                placeholder="01 Feb - 08 Feb"
-              />
-            </div>
-
-            <p class="statistic__period-result">
-              In total for the specified period
-              <span class="statistic__task-found">${completedTaskCount}</span> tasks were fulfilled.
-            </p>
-          </div>
-          <div class="statistic__line-graphic visually-hidden">
-            <canvas class="statistic__days" width="550" height="150"></canvas>
-          </div>
+    <div class="statistic__line">
+      <div class="statistic__period">
+        <h2 class="statistic__period-title">Task Activity DIAGRAM</h2>
+        <div class="statistic-input-wrap">
+          <input class="statistic__period-input" type="text" placeholder="">
         </div>
-
-        <div class="statistic__circle">
-          <div class="statistic__colors-wrap visually-hidden">
-            <canvas class="statistic__colors" width="400" height="300"></canvas>
-          </div>
-        </div>
-      </section>`;
+        <p class="statistic__period-result">
+          In total for the specified period
+          <span class="statistic__task-found">${completedTaskCount}</span>
+          tasks were fulfilled.
+        </p>
+      </div>
+      <div class="statistic__line-graphic">
+        <canvas class="statistic__days" width="550" height="150"></canvas>
+      </div>
+    </div>
+    <div class="statistic__circle">
+      <div class="statistic__colors-wrap">
+        <canvas class="statistic__colors" width="400" height="300"></canvas>
+      </div>
+    </div>
+  </section>`;
 };
 
 export default class Statistics extends SmartView {
@@ -184,6 +177,7 @@ export default class Statistics extends SmartView {
 
     this._data = {
       tasks,
+      // По условиям техзадания по умолчанию интервал - неделя от текущей даты
       dateFrom: (() => {
         const daysToFullWeek = 6;
         const date = getCurrentDate();
@@ -260,7 +254,6 @@ export default class Statistics extends SmartView {
     }
 
     const {tasks, dateFrom, dateTo} = this._data;
-
     const colorsCtx = this.getElement().querySelector(`.statistic__colors`);
     const daysCtx = this.getElement().querySelector(`.statistic__days`);
 
