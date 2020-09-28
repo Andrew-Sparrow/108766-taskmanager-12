@@ -47,7 +47,7 @@ export const countTasksInDateRange = (dates, tasks) => {
 
 export const getDatesInRange = (dateFrom, dateTo) => {
   const dates = [];
-  let stepDate = new Date(dateFrom);
+  const stepDate = new Date(dateFrom);
 
   // Нам нужно получить все даты из диапазона,
   // чтобы корректно отразить их на графике.

@@ -41,6 +41,9 @@ export default class SiteMenuView extends AbstractView {
     super();
 
     this._menuClickHandler = this._menuClickHandler.bind(this);
+    this.handleTaskNewFormClose = this.handleTaskNewFormClose.bind(this);
+    this.disableMenuItems = this.disableMenuItems.bind(this);
+    this.setMenuItem = this.setMenuItem.bind(this);
   }
 
   getTemplate() {
@@ -63,5 +66,18 @@ export default class SiteMenuView extends AbstractView {
     if (item !== null) {
       item.checked = true;
     }
+  }
+
+  handleTaskNewFormClose() {
+    this.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = false;
+    this.getElement().querySelector(`[value=${MenuItem.STATISTICS}]`).disabled = false;
+    this.setMenuItem(MenuItem.TASKS);
+  }
+
+  disableMenuItems() {
+    this.getElement().querySelector(`[value=${MenuItem.TASKS}]`).checked = false;
+    this.getElement().querySelector(`[value=${MenuItem.STATISTICS}]`).checked = false;
+    this.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = true;
+    this.getElement().querySelector(`[value=${MenuItem.STATISTICS}]`).disabled = true;
   }
 }

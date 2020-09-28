@@ -96,6 +96,15 @@ body {
   text-shadow: 1px 0 0 #000000;
   cursor: inherit;
 }
+.control__input:disabled + .control__label:hover {
+  opacity: 1;
+  text-shadow: none;
+  cursor: default;
+}
+.control__input:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
 .control__label--new-task {
   margin-right: auto;
 }

@@ -92,14 +92,13 @@ body {
   text-shadow: 1px 0 0 #000000;
 }
 .control__input:checked + .control__label:hover {
-  opacity: 1;
-  text-shadow: 1px 0 0 #000000;
-  cursor: inherit;
+   opacity: 1;
+   text-shadow: 1px 0 0 #000000;
+   cursor: inherit;
 }
 .control__label--new-task {
   margin-right: auto;
 }
-
 .search__input {
   width: 100%;
   height: 40px;

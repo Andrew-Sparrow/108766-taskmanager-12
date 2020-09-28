@@ -37,24 +37,22 @@ render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
 const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel);
 const filterPresenter = new FilterPresenter(siteMainElement, filterModel, tasksModel);
 
-const handleTaskNewFormClose = () => {
-  siteMenuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = false;
-  siteMenuComponent.setMenuItem(MenuItem.TASKS);
-};
-
 let statisticsComponent = null;
 
 const handleSiteMenuClick = (menuItem) => {
+
   switch (menuItem) {
     case MenuItem.ADD_NEW_TASK:
       remove(statisticsComponent);
       boardPresenter.destroy();
       filterModel.setFilter(UpdateTypeForRerender.MAJOR, FilterType.ALL);
       boardPresenter.init();
-      boardPresenter.createTask(handleTaskNewFormClose);
-      siteMenuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = true;
+      boardPresenter.createTask(siteMenuComponent.handleTaskNewFormClose);
+      siteMenuComponent.disableMenuItems();
+      // siteMenuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = true;
       break;
     case MenuItem.TASKS:
+      boardPresenter.destroy();
       boardPresenter.init();
       remove(statisticsComponent);
       break;

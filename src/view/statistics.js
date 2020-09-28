@@ -14,6 +14,8 @@ import {
   getDatesInRange
 } from "../utils/statistics.js";
 
+const DAYS_TO_FULLWEEK = 6;
+
 const renderColorsChart = (colorsCtx, tasks) => {
   const taskColors = tasks.map((task) => task.color);
   const uniqColors = makeItemsUniq(taskColors);
@@ -179,9 +181,8 @@ export default class Statistics extends SmartView {
       tasks,
       // По условиям техзадания по умолчанию интервал - неделя от текущей даты
       dateFrom: (() => {
-        const daysToFullWeek = 6;
         const date = getCurrentDate();
-        date.setDate(date.getDate() - daysToFullWeek);
+        date.setDate(date.getDate() - DAYS_TO_FULLWEEK);
         return date;
       })(),
       dateTo: getCurrentDate()
