@@ -39,7 +39,7 @@ const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 const siteMenuComponent = new SiteMenuView();
 
 const filterPresenter = new FilterPresenter(siteMainElement, filterModel, tasksModel);
-const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel);
+const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel, api);
 
 let statisticsComponent = null;
 

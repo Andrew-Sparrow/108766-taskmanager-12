@@ -29,7 +29,7 @@ import {
 const TASK_COUNT_PER_STEP = 8;
 
 export default class Board {
-  constructor(boardContainer, tasksModel, filterModel) {
+  constructor(boardContainer, tasksModel, filterModel, api) {
 
     this._tasksModel = tasksModel;
     this._filterModel = filterModel;
@@ -40,6 +40,7 @@ export default class Board {
     this._currentSortType = SortType.DEFAULT;
     this._taskPresenter = {};
     this._isLoading = true;
+    this._api = api;
 
     this._sortComponent = null;
     this._loadMoreButtonComponent = null;
@@ -90,14 +91,18 @@ export default class Board {
       .forEach((presenter) => presenter.resetView());
   }
 
+  // Здесь будем вызывать обновление модели.
+  // actionTypeForModel - действие пользователя, нужно чтобы понять, какой метод модели вызвать
+  // updateTypeForRerender - тип изменений, нужно чтобы понять, что после нужно обновить
+  // updatedData - обновленные данные
   _handleViewAction(actionTypeForModel, updateTypeForRerender, updatedData) {
-    // Здесь будем вызывать обновление модели.
-    // actionType - действие пользователя, нужно чтобы понять, какой метод модели вызвать
-    // updateType - тип изменений, нужно чтобы понять, что после нужно обновить
-    // update - обновленные данные
     switch (actionTypeForModel) {
       case UserActionForModel.UPDATE_TASK:
-        this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        // this._tasksModel.updateTask(updateTypeForRerender, updatedData);
+        this._api.updateTask(updatedData)
+          .then((response) => {
+            this._tasksModel.updateTask(updateTypeForRerender, response);
+          });
         break;
       case UserActionForModel.ADD_TASK:
         this._tasksModel.addTask(updateTypeForRerender, updatedData);
