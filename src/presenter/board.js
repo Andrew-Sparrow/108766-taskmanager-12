@@ -98,17 +98,22 @@ export default class Board {
   _handleViewAction(actionTypeForModel, updateTypeForRerender, updatedData) {
     switch (actionTypeForModel) {
       case UserActionForModel.UPDATE_TASK:
-        // this._tasksModel.updateTask(updateTypeForRerender, updatedData);
         this._api.updateTask(updatedData)
           .then((response) => {
             this._tasksModel.updateTask(updateTypeForRerender, response);
           });
         break;
       case UserActionForModel.ADD_TASK:
-        this._tasksModel.addTask(updateTypeForRerender, updatedData);
+        this._api.addTask(updatedData)
+          .then((response) => {
+            this._tasksModel.addTask(updateTypeForRerender, response);
+          });
         break;
       case UserActionForModel.DELETE_TASK:
-        this._tasksModel.deleteTask(updateTypeForRerender, updatedData);
+        this._api.deleteTask(updatedData)
+          .then(() => {
+            this._tasksModel.deleteTask(updateTypeForRerender, updatedData);
+          });
         break;
     }
   }
@@ -119,19 +124,19 @@ export default class Board {
     // - обновить список (например, когда задача ушла в архив)
     // - обновить всю доску (например, при переключении фильтра)
     switch (updateTypeForRerender) {
+      // - обновить часть списка (например, когда поменялось описание)
       case UpdateTypeForRerender.PATCH:
-        // - обновить часть списка (например, когда поменялось описание)
         this._taskPresenter[data.id].init(data);
         break;
 
+      // - обновить список (например, когда задача ушла в архив)
       case UpdateTypeForRerender.MINOR:
-        // - обновить список (например, когда задача ушла в архив)
         this._clearBoard();
         this._renderBoard();
         break;
 
+      // - обновить всю доску (например, при переключении фильтра)
       case UpdateTypeForRerender.MAJOR:
-        // - обновить всю доску (например, при переключении фильтра)
         this._clearBoard({resetRenderedTaskCount: true, resetSortType: true});
         this._renderBoard();
         break;
