@@ -66,16 +66,17 @@ const handleSiteMenuClick = (menuItem) => {
   }
 };
 
-siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
-
-render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
 filterPresenter.init();
 boardPresenter.init();
 
 api.getTasks()
   .then((tasksFromServer) => {
     tasksModel.setTasks(UpdateTypeForRerender.INIT, tasksFromServer);
+    siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
+    render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
   })
   .catch(() => {
     tasksModel.setTasks(UpdateTypeForRerender.INIT, []);
+    siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
+    render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
   });
