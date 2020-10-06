@@ -6,7 +6,7 @@ import FilterModel from "./model/filter-model.js";
 import StatisticsView from "./view/statistics.js";
 import Api from "./api.js";
 
-import {generateTask} from "./mock/task.js";
+// import {generateTask} from "./mock/task.js";
 
 import {
   MenuItem,
@@ -20,21 +20,16 @@ import {
   remove
 } from "./utils/render.js";
 
-const TASK_COUNT = 22;
+// const TASK_COUNT = 22;
 const AUTHORIZATION = `Basic hS2sds3df3sk4wa5shl1sa2j`;
 const END_POINT = `https://12.ecmascript.pages.academy/task-manager`;
 
-const tasks = new Array(TASK_COUNT).fill().map(generateTask);
+// const tasks = new Array(TASK_COUNT).fill().map(generateTask);
 
 const api = new Api(END_POINT, AUTHORIZATION);
 
-api.getTasks()
-  .then((tasksFromServer) => {
-    console.log(tasksFromServer);
-  });
-
 const tasksModel = new TasksModel();
-tasksModel.setTasks(tasks);
+// tasksModel.setTasks(tasks);
 
 const filterModel = new FilterModel();
 
@@ -47,8 +42,6 @@ const filterPresenter = new FilterPresenter(siteMainElement, filterModel, tasksM
 const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel);
 
 let statisticsComponent = null;
-
-render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
 
 const handleSiteMenuClick = (menuItem) => {
   switch (menuItem) {
@@ -75,5 +68,11 @@ const handleSiteMenuClick = (menuItem) => {
 
 siteMenuComponent.setMenuClickHandler(handleSiteMenuClick);
 
+render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
 filterPresenter.init();
 boardPresenter.init();
+
+api.getTasks()
+  .then((tasksFromServer) => {
+    tasksModel.setTasks(tasksFromServer);
+  });

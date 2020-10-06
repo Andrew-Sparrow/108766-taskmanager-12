@@ -5,11 +5,7 @@ import {
   getRandomBoolean
 } from "../utils/common.js";
 
-// Date.now() и Math.random() - плохие решения для генерации id
-// в "продуктовом" коде, а для моков самое то.
-// Для "продуктового" кода используйте что-то понадежнее,
-// вроде nanoid - https://github.com/ai/nanoid
-export const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+import {generateId} from "../utils/task.js";
 
 const generateDescription = () => {
   const randomIndex = getRandomIndexOfArray(DESCRIPTIONS);
