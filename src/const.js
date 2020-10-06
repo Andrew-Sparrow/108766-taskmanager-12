@@ -31,7 +31,8 @@ export const UserActionForModel = {
 export const UpdateTypeForRerender = {
   PATCH: `PATCH`,
   MINOR: `MINOR`,
-  MAJOR: `MAJOR`
+  MAJOR: `MAJOR`,
+  INIT: `INIT`
 };
 
 export const FilterType = {

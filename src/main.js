@@ -74,5 +74,8 @@ boardPresenter.init();
 
 api.getTasks()
   .then((tasksFromServer) => {
-    tasksModel.setTasks(tasksFromServer);
+    tasksModel.setTasks(UpdateTypeForRerender.INIT, tasksFromServer);
+  })
+  .catch(() => {
+    tasksModel.setTasks(UpdateTypeForRerender.INIT, []);
   });
