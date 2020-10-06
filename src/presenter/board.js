@@ -131,7 +131,7 @@ export default class Board {
   }
 
   _getTasks() {
-    const filterType = this._filterModel.getFilter();
+    const filterType = this._filterModel.getActiveFilter();
     const tasks = this._tasksModel.getTasks();
     const filtredTasks = filter[filterType](tasks);
 

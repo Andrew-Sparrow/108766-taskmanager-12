@@ -30,17 +30,17 @@ const filterModel = new FilterModel();
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
+
 const siteMenuComponent = new SiteMenuView();
 
-render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
-
-const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel);
 const filterPresenter = new FilterPresenter(siteMainElement, filterModel, tasksModel);
+const boardPresenter = new BoardPresenter(siteMainElement, tasksModel, filterModel);
 
 let statisticsComponent = null;
 
-const handleSiteMenuClick = (menuItem) => {
+render(siteHeaderElement, siteMenuComponent, RenderPosition.BEFOREEND);
 
+const handleSiteMenuClick = (menuItem) => {
   switch (menuItem) {
     case MenuItem.ADD_NEW_TASK:
       remove(statisticsComponent);
@@ -49,7 +49,6 @@ const handleSiteMenuClick = (menuItem) => {
       boardPresenter.init();
       boardPresenter.createTask(siteMenuComponent.handleTaskNewFormClose);
       siteMenuComponent.disableMenuItems();
-      // siteMenuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = true;
       break;
     case MenuItem.TASKS:
       boardPresenter.destroy();

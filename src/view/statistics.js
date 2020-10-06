@@ -255,6 +255,7 @@ export default class Statistics extends SmartView {
     }
 
     const {tasks, dateFrom, dateTo} = this._data;
+
     const colorsCtx = this.getElement().querySelector(`.statistic__colors`);
     const daysCtx = this.getElement().querySelector(`.statistic__days`);
 
