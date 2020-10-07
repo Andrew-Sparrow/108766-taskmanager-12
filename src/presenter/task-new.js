@@ -62,6 +62,18 @@ export default class TaskNew {
     });
   }
 
+  setAborting() {
+    const resetFormState = () => {
+      this._taskEditComponent.updateData({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false
+      });
+    };
+
+    this._taskEditComponent.shake(resetFormState);
+  }
+
   _handleFormSubmit(task) {
     this._changeData(
         UserActionForModel.ADD_TASK,

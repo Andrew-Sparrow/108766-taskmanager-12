@@ -25,7 +25,8 @@ const Mode = {
 
 export const State = {
   SAVING: `SAVING`,
-  DELETING: `DELETING`
+  DELETING: `DELETING`,
+  ABORTING: `ABORTING`
 };
 
 export default class Task {
@@ -94,6 +95,14 @@ export default class Task {
   }
 
   setViewState(state) {
+    const resetFormState = () => {
+      this._taskEditComponent.updateData({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false
+      });
+    };
+
     switch (state) {
       case State.SAVING:
         this._taskEditComponent.updateData({
@@ -107,6 +116,9 @@ export default class Task {
           isDeleting: true
         });
         break;
+      case State.ABORTING:
+        this._taskComponent.shake(resetFormState);
+        this._taskEditComponent.shake(resetFormState);
     }
   }
 

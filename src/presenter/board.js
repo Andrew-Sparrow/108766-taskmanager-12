@@ -105,6 +105,9 @@ export default class Board {
         this._api.updateTask(updatedData)
           .then((response) => {
             this._tasksModel.updateTask(updateTypeForRerender, response);
+          })
+          .catch(() => {
+            this._taskPresenter[updatedData.id].setViewState(TaskPresenterViewState.ABORTING);
           });
         break;
       case UserActionForModel.ADD_TASK:
@@ -112,6 +115,9 @@ export default class Board {
         this._api.addTask(updatedData)
           .then((response) => {
             this._tasksModel.addTask(updateTypeForRerender, response);
+          })
+          .catch(() => {
+            this._taskNewPresenter.setAborting();
           });
         break;
       case UserActionForModel.DELETE_TASK:
@@ -119,6 +125,9 @@ export default class Board {
         this._api.deleteTask(updatedData)
           .then(() => {
             this._tasksModel.deleteTask(updateTypeForRerender, updatedData);
+          })
+          .catch(() => {
+            this._taskPresenter[updatedData.id].setViewState(TaskPresenterViewState.ABORTING);
           });
         break;
     }
